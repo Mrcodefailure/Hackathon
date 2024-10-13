@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="SyncPoint"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My new page">
+    <link rel="shortcut icon" href="{% static 'Source/SyncPoint.webp' %}" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script src="{% static 'Javascript/meetingroom.js' %}" defer></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'CSS/meetingroom.css' %}">
+    <title>Meeting</title>
+</head>
+<body class="comfortaa">
+    <div class="whitescreen" id="whitescreen"></div>
+    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="black" class="settings" id="settings"><path d="m370-80-16-128q-13-5-24.5-12T307-235l-119 50L78-375l103-78q-1-7-1-13.5v-27q0-6.5 1-13.5L78-585l110-190 119 50q11-8 23-15t24-12l16-128h220l16 128q13 5 24.5 12t22.5 15l119-50 110 190-103 78q1 7 1 13.5v27q0 6.5-2 13.5l103 78-110 190-118-50q-11 8-23 15t-24 12L590-80H370Zm70-80h79l14-106q31-8 57.5-23.5T639-327l99 41 39-68-86-65q5-14 7-29.5t2-31.5q0-16-2-31.5t-7-29.5l86-65-39-68-99 42q-22-23-48.5-38.5T533-694l-13-106h-79l-14 106q-31 8-57.5 23.5T321-633l-99-41-39 68 86 64q-5 15-7 30t-2 32q0 16 2 31t7 30l-86 65 39 68 99-42q22 23 48.5 38.5T427-266l13 106Zm42-180q58 0 99-41t41-99q0-58-41-99t-99-41q-59 0-99.5 41T342-480q0 58 40.5 99t99.5 41Zm-2-140Z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="black" class="home" id="home"><path d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="black" class="person" id="person"><path d="M480-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM160-160v-112q0-34 17.5-62.5T224-378q62-31 126-46.5T480-440q66 0 130 15.5T736-378q29 15 46.5 43.5T800-272v112H160Zm80-80h480v-32q0-11-5.5-20T700-306q-54-27-109-40.5T480-360q-56 0-111 13.5T260-306q-9 5-14.5 14t-5.5 20v32Zm240-320q33 0 56.5-23.5T560-640q0-33-23.5-56.5T480-720q-33 0-56.5 23.5T400-640q0 33 23.5 56.5T480-560Zm0-80Zm0 400Z"/></svg>
+    
+    <h1 id="meeting-name">Meeting Name</h1>
+    
+    <div class="container">
+        <div class="video-box" id="cameraDiv-other"></div>
+        <div class="self-video" id="cameraDiv-self"></div>
+    </div>
+
+    <div id="buffer-div"></div>
+
+    <div class="status-icons">
+        <div class="status-icon login" style="background-color: green;" onclick="window.location.replace('../loginSignup/');"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M480-120v-80h280v-560H480v-80h280q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H480Zm-80-160-55-58 102-102H120v-80h327L345-622l55-58 200 200-200 200Z"/></svg></div>
+        <div class="status-icon whiteboard" style="background-color: rgb(216, 216, 29);"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed" class="whiteboard-svg"><path d="M240-120v-80h200v-120H160q-33 0-56.5-23.5T80-400v-360q0-33 23.5-56.5T160-840h640q33 0 56.5 23.5T880-760v360q0 33-23.5 56.5T800-320H520v120h200v80H240Zm-80-280h640v-360H160v360Zm0 0v-360 360Z"/></svg><a href="http://127.0.0.1:8000/whiteboard" class="whiteboard-anchor" target="_blank" rel="noopener noreferrer"></a></div>
+        <div class="status-icon chat" id="chatbutton" style="background-color: blue;" onclick="toggleChat()"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M240-400h320v-80H240v80Zm0-120h480v-80H240v80Zm0-120h480v-80H240v80ZM80-80v-720q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H240L80-80Zm126-240h594v-480H160v525l46-45Zm-46 0v-480 480Z"/></svg></div>
+        <div class="status-icon leave-call" style="background-color: red;"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="m136-304-92-90q-12-12-12-28t12-28q88-95 203-142.5T480-640q118 0 232.5 47.5T916-450q12 12 12 28t-12 28l-92 90q-11 11-25.5 12t-26.5-8l-116-88q-8-6-12-14t-4-18v-114q-38-12-78-19t-82-7q-42 0-82 7t-78 19v114q0 10-4 18t-12 14l-116 88q-12 9-26.5 8T136-304Zm104-198q-29 15-56 34.5T128-424l40 40 72-56v-62Zm480 2v60l72 56 40-38q-29-26-56-45t-56-33Zm-480-2Zm480 2Z"/></svg></div>
+    </div>
+
+    <div class="controls-1">
+        <div class="user-controls" id="camera" data-state="off" title="Camera"><img src="{% static 'Source/CameraOff.svg' %}" alt="Video Off"></div>
+        <div class="user-controls" id="mic" data-state="off" title="Mic"><img src="{% static 'Source/MicrophoneOff.svg' %}" alt="Mic Off"></div>
+        <div class="user-controls" id="speaker" data-state="off" title="Speaker"><img src="{% static 'Source/SpeakerOff.svg' %}" alt="Speaker Off"></div>
+    </div>
+    <div id="chat-container" class="hidden raleway">
+        <h2>Chatbox</h2>
+        <div id="messages">
+            <!-- Chat messages will be displayed here -->
+        </div>
+        <input type="text" id="message-input" placeholder="Type your message here"></input>
+        <button id="send-message">Send Message</button>
+    
+        <div id="doubt-section">
+            <h2>Doubtbox</h2>
+            <input type="text" id="doubt-input" placeholder="Type your doubt here (sent to teachers only)"></input>
+            <button id="send-doubt">Send Doubt</button>
+        </div>
+    </div>
+</body>
+</html>

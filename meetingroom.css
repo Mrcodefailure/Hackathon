@@ -1,0 +1,336 @@
+/* Variables */
+:root {
+    --size: 10.42vw;
+    --icon: 36px;
+    --translate: calc(50% - var(--size)/2);
+}
+
+.raleway {
+    font-family: "Raleway", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+  
+.comfortaa {
+    font-family: "Comfortaa", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+}
+  
+html, body {
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+}
+  
+body {
+    display: grid;
+    font-family: "Raleway", sans-serif;
+    text-align: center;
+    background-color: #f5f5f5;
+    height: 100vh;
+}
+  
+.whitescreen {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: fixed;
+    background-color: white;
+    pointer-events: none;
+    color: white;
+    opacity: 0;
+    z-index: 200;
+    transition: opacity 0.3s ease;
+}
+
+.home {
+    position: absolute;
+    right: 30px;
+    top: 30px;
+    z-index: 1;
+}
+
+.home.expand {
+    width: var(--size);
+    height: var(--size);
+    top: var(--translate);
+    right: calc(var(--translate) + 40px);
+    transition: all 0.3s ease;
+}
+  
+.person {
+    opacity: 0;
+    border-radius: 50%;
+    padding: 0;
+    background-color: white;
+    position: relative;
+    pointer-events: none;
+    transform: translate(45vw, 37vh);
+    transition: all 0.3s ease;
+    z-index: 2;
+}
+  
+.person.visible {
+    pointer-events: auto;
+    opacity: 1;
+    width: var(--size);
+    height: var(--size);
+}
+
+@keyframes rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+  
+    100% {
+      transform: rotate(360deg);
+    }
+}
+  
+.settings {
+    display: flex;
+    justify-content: flex-start;
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    z-index: 1;
+    transition: all 0.3s ease;
+}
+  
+.settings.expand {
+    width: var(--size);
+    height: var(--size);
+    top: calc(50vh - var(--size) / 2);
+    left: calc(50vw - var(--size) / 2);
+    transition: all 0.3s ease;
+}
+  
+.settings.rotating {
+    animation: rotate 1s linear infinite;
+}
+
+#buffer-div {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+video.self {
+    opacity: 0;
+    display: none;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 0vh;
+    margin: 20px;
+    width: 90vw;
+    top: 50px;
+    position: absolute;
+}
+
+.video-box, .self-video {
+    width: 40vw;
+    height: 50vh;
+    border: 3px solid black;
+    margin-top: 71.429vh;
+    border-radius: 5px;
+}
+
+.video-box {
+    right: 48vw;
+}
+
+h1 {
+    justify-self: center;
+    font-size: 50px;
+    top: 10px;
+    position: absolute;
+}
+
+.status-icons {
+    position: absolute;
+    right: 10px;
+    position: absolute;
+    top: 25vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.status-icon {
+    width: 80px;
+    height: 80px;
+    border: 0.5px solid grey;
+    border-radius: 50%;
+    margin: 5px 0;
+    display: grid;
+}
+
+.status-icon > svg {
+    align-self: center;
+    justify-self: center;
+}
+
+.user-controls {
+    width: 80px;
+    height: 80px;
+    background-color: red;
+    border-radius: 50%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+    font-size: 0;
+    color: white;
+    overflow: hidden;
+    padding: 5px;
+}
+  
+.user-controls:hover {
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+    background-color: #ff0000;
+    font-size: 16px;
+}
+  
+.user-controls img {
+    width: var(--icon);
+    height: var(--icon);
+    transition: opacity 0.3s ease;
+}
+  
+.user-controls:hover img {
+    opacity: 0;
+}
+  
+.user-controls::after {
+    content: attr(title);
+    position: absolute;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    font-size: 12px;
+}
+  
+.user-controls:hover::after {
+    opacity: 1;
+    font-size: 16px;
+}
+
+.user-controls.toggled {
+    background-color: white;
+    color: red;
+    transition: all 0.3s ease;
+}
+
+.controls-1 {
+    display: flex;
+    flex-direction: row;
+    width: 49vw;
+    justify-content: space-evenly;
+    position: absolute;
+    top: 78vh;
+}
+
+.whiteboard-anchor {
+    width: 100%;
+    height: 100%;
+    display: block;
+    z-index: 10;
+    position: relative;
+}
+
+#chat-container {
+    width: 80%;
+    height: 90%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    position: relative;
+    justify-self: flex-end;
+    transform: scale(0);
+    opacity: 0;
+    transition: all 0.5s ease;
+    transform-origin: center;
+    bottom: 10vh;
+    display: grid;
+}
+
+h2 {
+    top: -30px;
+    position: relative;
+}
+
+#chat-container.visibility {
+    transform: scale(1);
+    opacity: 1;
+    transition: all 0.5s ease;
+}
+
+#messages {
+    height: 160%;
+    border: 1px solid #ccc;
+    overflow-y: scroll;
+    padding: 10px;
+    top: -50px;
+    position: relative;
+}
+
+#messages div {
+    margin-bottom: 10px;
+}
+
+#message-input, #doubt-input {
+    width: 98%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#send-message, #send-doubt {
+    padding: 10px 20px;
+    height: 30px;
+    border-radius: 15px;
+    margin-top: 10px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+#send-message:hover, #send-doubt:hover {
+    background-color: #218838;
+    width: 40px;
+}
+
+#doubt-section {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.hidden {
+    display: none;
+}
+
+.visible {
+    display: flex;
+}
+
+.whiteboard-svg {
+    position: absolute;
+}
+
+input {
+    overflow-y: scroll;
+}
